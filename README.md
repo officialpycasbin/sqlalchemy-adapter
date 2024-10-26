@@ -1,8 +1,8 @@
 SQLAlchemy Adapter for PyCasbin 
 ====
 
-[![GitHub Actions](https://github.com/pycasbin/sqlalchemy-adapter/workflows/build/badge.svg?branch=master)](https://github.com/pycasbin/sqlalchemy-adapter/actions)
-[![Coverage Status](https://coveralls.io/repos/github/pycasbin/sqlalchemy-adapter/badge.svg)](https://coveralls.io/github/pycasbin/sqlalchemy-adapter)
+[![GitHub Actions](https://github.com/officialpycasbin/sqlalchemy-adapter/workflows/build/badge.svg?branch=master)](https://github.com/officialpycasbin/sqlalchemy-adapter/actions)
+[![Coverage Status](https://coveralls.io/repos/github/officialpycasbin/sqlalchemy-adapter/badge.svg)](https://coveralls.io/github/officialpycasbin/sqlalchemy-adapter)
 [![Version](https://img.shields.io/pypi/v/casbin_sqlalchemy_adapter.svg)](https://pypi.org/project/casbin_sqlalchemy_adapter/)
 [![PyPI - Wheel](https://img.shields.io/pypi/wheel/casbin_sqlalchemy_adapter.svg)](https://pypi.org/project/casbin_sqlalchemy_adapter/)
 [![Pyversions](https://img.shields.io/pypi/pyversions/casbin_sqlalchemy_adapter.svg)](https://pypi.org/project/casbin_sqlalchemy_adapter/)

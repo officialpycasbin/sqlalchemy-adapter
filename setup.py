@@ -15,12 +15,12 @@ install_requires = [x.strip() for x in all_reqs if "git+" not in x]
 
 setup(
     name="casbin_sqlalchemy_adapter",
-    author="TechLee",
-    author_email="techlee@qq.com",
+    author="Casbin",
+    author_email="admin@casbin.org",
     description="SQLAlchemy Adapter for PyCasbin",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pycasbin/sqlalchemy-adapter",
+    url="https://github.com/officialpycasbin/sqlalchemy-adapter",
     keywords=[
         "casbin",
         "SQLAlchemy",
