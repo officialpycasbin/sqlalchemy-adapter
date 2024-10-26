@@ -14,7 +14,7 @@ with open(path.join(here, "requirements.txt"), encoding="utf-8") as f:
 install_requires = [x.strip() for x in all_reqs if "git+" not in x]
 
 setup(
-    name="casbin_sqlalchemy_adapter",
+    name="sqlalchemy_adapter",
     author="Casbin",
     author_email="admin@casbin.org",
     description="SQLAlchemy Adapter for PyCasbin",

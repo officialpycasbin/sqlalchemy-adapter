@@ -5,10 +5,10 @@ import casbin
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 
-from casbin_sqlalchemy_adapter import Adapter
-from casbin_sqlalchemy_adapter import Base
-from casbin_sqlalchemy_adapter import CasbinRule
-from casbin_sqlalchemy_adapter.adapter import Filter
+from sqlalchemy_adapter import Adapter
+from sqlalchemy_adapter import Base
+from sqlalchemy_adapter import CasbinRule
+from sqlalchemy_adapter.adapter import Filter
 
 
 def get_fixture(path):

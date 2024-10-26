@@ -1,2 +1,2 @@
 [run]
-include = casbin_sqlalchemy_adapter/*
+include = sqlalchemy_adapter/*
