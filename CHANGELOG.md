@@ -1,5 +1,13 @@
 # Semantic Versioning Changelog
 
+# [1.3.0](https://github.com/officialpycasbin/sqlalchemy-adapter/compare/v1.2.0...v1.3.0) (2024-10-26)
+
+
+### Features
+
+* update path ([7de8ac4](https://github.com/officialpycasbin/sqlalchemy-adapter/commit/7de8ac47040136e315878d45a76041c1993c2e8d))
+* update path ([9ad0414](https://github.com/officialpycasbin/sqlalchemy-adapter/commit/9ad041478d79075066647b4961b28e49a9f45b7f))
+
 # [1.2.0](https://github.com/officialpycasbin/sqlalchemy-adapter/compare/v1.1.0...v1.2.0) (2024-05-30)
 
 
