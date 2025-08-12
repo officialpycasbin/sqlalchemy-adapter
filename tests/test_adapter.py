@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy_adapter import Adapter
 from sqlalchemy_adapter import Base
 from sqlalchemy_adapter import CasbinRule
-from sqlalchemy_adapter.adapter import Filter
+from sqlalchemy_adapter.adapter import Filter, create_casbin_rule_class
 
 
 def get_fixture(path):
@@ -30,6 +30,25 @@ def get_enforcer():
     s.add(CasbinRule(ptype="p", v0="data2_admin", v1="data2", v2="read"))
     s.add(CasbinRule(ptype="p", v0="data2_admin", v1="data2", v2="write"))
     s.add(CasbinRule(ptype="g", v0="alice", v1="data2_admin"))
+    s.commit()
+    s.close()
+
+    return casbin.Enforcer(get_fixture("rbac_model.conf"), adapter)
+
+
+def get_custom_table_name_enforcer():
+    engine = create_engine("sqlite://")
+    table_name = "custom_casbin_rule_table"
+    adapter = Adapter(engine, table_name=table_name)
+
+    session = sessionmaker(bind=engine)
+    Base.metadata.create_all(engine)
+    s = session()
+
+    CustomTableCasbinRule = create_casbin_rule_class(table_name)
+
+    s.query(CustomTableCasbinRule).delete()
+    s.add(CustomTableCasbinRule(ptype="p", v0="alice", v1="data1", v2="read"))
     s.commit()
     s.close()
 
@@ -60,6 +79,12 @@ class TestConfig(TestCase):
         s.add(CustomRule(not_exist="NotNone"))
         s.commit()
         self.assertEqual(s.query(CustomRule).all()[0].not_exist, "NotNone")
+
+    def test_custom_table_name(self):
+        e = get_custom_table_name_enforcer()
+
+        self.assertTrue(e.enforce("alice", "data1", "read"))
+        self.assertFalse(e.enforce("bob", "data2", "write"))
 
     def test_enforcer_basic(self):
         e = get_enforcer()
