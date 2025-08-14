@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.4.0](https://github.com/officialpycasbin/sqlalchemy-adapter/compare/v1.3.0...v1.4.0) (2025-08-14)
+
+
+### Features
+
+* add custom table names for CasbinRule class and update tests ([0d2b660](https://github.com/officialpycasbin/sqlalchemy-adapter/commit/0d2b660ad3dd42841e5aafbc2cfe4207d72db006))
+
 # [1.3.0](https://github.com/officialpycasbin/sqlalchemy-adapter/compare/v1.2.0...v1.3.0) (2024-10-26)
 
 
