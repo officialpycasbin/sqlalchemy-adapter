@@ -29,6 +29,8 @@ pip install sqlalchemy_adapter
 
 ## Simple Example
 
+You can save and load policy to database.
+
 ```python
 import sqlalchemy_adapter
 import casbin
@@ -47,6 +49,22 @@ if e.enforce(sub, obj, act):
 else:
     # deny the request, show an error
     pass
+```
+
+By default, policies are stored in the `casbin_rule` table.
+You can custom the table where the policy is stored by using the `table_name` parameter.
+
+```python
+
+import sqlalchemy_adapter
+import casbin
+
+custom_table_name = "<custom_table_name>"
+
+# create adapter with custom table name.
+adapter = sqlalchemy_adapter.Adapter('sqlite:///test.db', table_name=custom_table_name)
+
+e = casbin.Enforcer('path/to/model.conf', adapter)
 ```
 
 

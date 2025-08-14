@@ -19,28 +19,46 @@ else:
         pass
 
 
-class CasbinRule(Base):
-    __tablename__ = "casbin_rule"
+def create_casbin_rule_class(table_name):
+    """
+    Factory function to create a CasbinRule class with a custom table name.
 
-    id = Column(Integer, primary_key=True)
-    ptype = Column(String(255))
-    v0 = Column(String(255))
-    v1 = Column(String(255))
-    v2 = Column(String(255))
-    v3 = Column(String(255))
-    v4 = Column(String(255))
-    v5 = Column(String(255))
+    Args:
+        table_name (str): Table name for the CasbinRule class.
 
-    def __str__(self):
-        arr = [self.ptype]
-        for v in (self.v0, self.v1, self.v2, self.v3, self.v4, self.v5):
-            if v is None:
-                break
-            arr.append(v)
-        return ", ".join(arr)
+    Returns:
+        db_class (CasbinRule): The CasbinRule class.
+    """
 
-    def __repr__(self):
-        return '<CasbinRule {}: "{}">'.format(self.id, str(self))
+    class CasbinRule(Base):
+        __tablename__ = table_name
+        __table_args__ = {"extend_existing": True}
+
+        id = Column(Integer, primary_key=True)
+        ptype = Column(String(255))
+        v0 = Column(String(255))
+        v1 = Column(String(255))
+        v2 = Column(String(255))
+        v3 = Column(String(255))
+        v4 = Column(String(255))
+        v5 = Column(String(255))
+
+        def __str__(self):
+            arr = [self.ptype]
+            for v in (self.v0, self.v1, self.v2, self.v3, self.v4, self.v5):
+                if v is None:
+                    break
+                arr.append(v)
+            return ", ".join(arr)
+
+        def __repr__(self):
+            return '<CasbinRule {}: "{}">'.format(self.id, str(self))
+
+    return CasbinRule
+
+
+# Export the default CasbinRule class with table name 'casbin_rule'.
+CasbinRule = create_casbin_rule_class("casbin_rule")
 
 
 class Filter:
@@ -56,14 +74,20 @@ class Filter:
 class Adapter(persist.Adapter, persist.adapters.UpdateAdapter):
     """the interface for Casbin adapters."""
 
-    def __init__(self, engine, db_class=None, filtered=False):
+    def __init__(
+        self,
+        engine,
+        db_class=None,
+        table_name="casbin_rule",
+        filtered=False,
+    ):
         if isinstance(engine, str):
             self._engine = create_engine(engine)
         else:
             self._engine = engine
 
         if db_class is None:
-            db_class = CasbinRule
+            db_class = create_casbin_rule_class(table_name=table_name)
         else:
             for attr in (
                 "id",
@@ -281,7 +305,6 @@ class Adapter(persist.Adapter, persist.adapters.UpdateAdapter):
         """_update_filtered_policies updates all the policies on the basis of the filter."""
 
         with self._session_scope() as session:
-
             # Load old policies
 
             query = session.query(self._db_class).filter(
