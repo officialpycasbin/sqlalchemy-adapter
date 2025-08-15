@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.5.0](https://github.com/officialpycasbin/sqlalchemy-adapter/compare/v1.4.0...v1.5.0) (2025-08-15)
+
+
+### Features
+
+* switch from casbin to pycasbin ([#6](https://github.com/officialpycasbin/sqlalchemy-adapter/issues/6)) ([4dc3674](https://github.com/officialpycasbin/sqlalchemy-adapter/commit/4dc36749438c0ab41ef330411cb4fa19e53bb244))
+
 # [1.4.0](https://github.com/officialpycasbin/sqlalchemy-adapter/compare/v1.3.0...v1.4.0) (2025-08-14)
 
 
