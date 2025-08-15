@@ -22,6 +22,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/officialpycasbin/sqlalchemy-adapter",
     keywords=[
+        "pycasbin",
         "casbin",
         "SQLAlchemy",
         "casbin-adapter",
