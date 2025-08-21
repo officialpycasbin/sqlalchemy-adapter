@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.6.0](https://github.com/officialpycasbin/sqlalchemy-adapter/compare/v1.5.0...v1.6.0) (2025-08-21)
+
+
+### Features
+
+* fix README badges ([#7](https://github.com/officialpycasbin/sqlalchemy-adapter/issues/7)) ([4a7ff92](https://github.com/officialpycasbin/sqlalchemy-adapter/commit/4a7ff92f377d8692ca1951de85bff0e537fbee73))
+
 # [1.5.0](https://github.com/officialpycasbin/sqlalchemy-adapter/compare/v1.4.0...v1.5.0) (2025-08-15)
 
 
