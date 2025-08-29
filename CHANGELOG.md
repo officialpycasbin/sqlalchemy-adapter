@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.7.0](https://github.com/officialpycasbin/sqlalchemy-adapter/compare/v1.6.0...v1.7.0) (2025-08-29)
+
+
+### Features
+
+* fix the bug that custom db_class alters global metadata state ([#8](https://github.com/officialpycasbin/sqlalchemy-adapter/issues/8)) ([ce9966d](https://github.com/officialpycasbin/sqlalchemy-adapter/commit/ce9966d413870a4df9aa037b73b3583d91067b30))
+
 # [1.6.0](https://github.com/officialpycasbin/sqlalchemy-adapter/compare/v1.5.0...v1.6.0) (2025-08-21)
 
 
