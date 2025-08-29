@@ -88,6 +88,7 @@ class Adapter(persist.Adapter, persist.adapters.UpdateAdapter):
 
         if db_class is None:
             db_class = create_casbin_rule_class(table_name=table_name)
+            metadata = Base.metadata
         else:
             for attr in (
                 "id",
@@ -101,12 +102,12 @@ class Adapter(persist.Adapter, persist.adapters.UpdateAdapter):
             ):  # id attr was used by filter
                 if not hasattr(db_class, attr):
                     raise Exception(f"{attr} not found in custom DatabaseClass.")
-            Base.metadata = db_class.metadata
+            metadata = db_class.metadata
 
         self._db_class = db_class
         self.session_local = sessionmaker(bind=self._engine)
 
-        Base.metadata.create_all(self._engine)
+        metadata.create_all(self._engine)
         self._filtered = filtered
 
     @contextmanager
