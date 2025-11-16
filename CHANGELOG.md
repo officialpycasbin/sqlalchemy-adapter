@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.8.0](https://github.com/officialpycasbin/sqlalchemy-adapter/compare/v1.7.0...v1.8.0) (2025-11-16)
+
+
+### Features
+
+* add `create_table` parameter to control automatic table creation ([#10](https://github.com/officialpycasbin/sqlalchemy-adapter/issues/10)) ([0ac6def](https://github.com/officialpycasbin/sqlalchemy-adapter/commit/0ac6defe17a469236515ab96ce894bf81e119c08))
+
 # [1.7.0](https://github.com/officialpycasbin/sqlalchemy-adapter/compare/v1.6.0...v1.7.0) (2025-08-29)
 
 
