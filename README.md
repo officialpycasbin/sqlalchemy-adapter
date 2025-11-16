@@ -67,6 +67,27 @@ adapter = sqlalchemy_adapter.Adapter('sqlite:///test.db', table_name=custom_tabl
 e = casbin.Enforcer('path/to/model.conf', adapter)
 ```
 
+## Prevent Automatic Table Creation
+
+By default, the adapter automatically creates the necessary database tables during initialization. If you want to use the adapter only as an intermediary without automatically creating tables, you can set the `create_table` parameter to `False`:
+
+```python
+import sqlalchemy_adapter
+import casbin
+
+# Create adapter without automatically creating tables
+adapter = sqlalchemy_adapter.Adapter('sqlite:///test.db', create_table=False)
+
+e = casbin.Enforcer('path/to/model.conf', adapter)
+```
+
+This is useful when:
+- Tables are already created by your database migration system
+- You want to manage table creation separately
+- You are using the adapter as an intermediary between SQLAlchemy and your system
+
+**Note:** When `create_table=False`, you are responsible for ensuring the required tables exist in the database before using the adapter.
+
 
 ### Getting Help
 

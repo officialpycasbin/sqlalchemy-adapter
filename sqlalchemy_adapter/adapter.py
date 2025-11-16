@@ -80,6 +80,7 @@ class Adapter(persist.Adapter, persist.adapters.UpdateAdapter):
         db_class=None,
         table_name="casbin_rule",
         filtered=False,
+        create_table=True,
     ):
         if isinstance(engine, str):
             self._engine = create_engine(engine)
@@ -107,7 +108,8 @@ class Adapter(persist.Adapter, persist.adapters.UpdateAdapter):
         self._db_class = db_class
         self.session_local = sessionmaker(bind=self._engine)
 
-        metadata.create_all(self._engine)
+        if create_table:
+            metadata.create_all(self._engine)
         self._filtered = filtered
 
     @contextmanager

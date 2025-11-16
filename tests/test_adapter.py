@@ -409,3 +409,78 @@ class TestConfig(TestCase):
 
         e.update_filtered_policies([["bob", "data2", "read"]], 0, "bob")
         self.assertTrue(e.enforce("bob", "data2", "read"))
+
+    def test_create_table_false(self):
+        """Test that tables are not created when create_table=False"""
+        from sqlalchemy import inspect
+
+        engine = create_engine("sqlite://")
+
+        # Create adapter with create_table=False
+        adapter = Adapter(engine, create_table=False)
+
+        # Verify that the table was NOT created
+        inspector = inspect(engine)
+        tables = inspector.get_table_names()
+        self.assertEqual(
+            len(tables), 0, "No tables should be created when create_table=False"
+        )
+
+    def test_create_table_true_default(self):
+        """Test that tables are created by default (backward compatibility)"""
+        from sqlalchemy import inspect
+
+        engine = create_engine("sqlite://")
+
+        # Create adapter without specifying create_table (should default to True)
+        adapter = Adapter(engine)
+
+        # Verify that the table WAS created
+        inspector = inspect(engine)
+        tables = inspector.get_table_names()
+        self.assertIn("casbin_rule", tables, "Table should be created by default")
+
+    def test_create_table_custom_table_name(self):
+        """Test that custom table name is not created when create_table=False"""
+        from sqlalchemy import inspect
+
+        engine = create_engine("sqlite://")
+        table_name = "my_custom_table"
+
+        # Create adapter with custom table name and create_table=False
+        adapter = Adapter(engine, table_name=table_name, create_table=False)
+
+        # Verify that the table was NOT created
+        inspector = inspect(engine)
+        tables = inspector.get_table_names()
+        self.assertEqual(
+            len(tables), 0, "No tables should be created when create_table=False"
+        )
+
+    def test_create_table_custom_db_class(self):
+        """Test that custom db_class table is not created when create_table=False"""
+        from sqlalchemy import inspect
+
+        class CustomRule(Base):
+            __tablename__ = "custom_rule_table"
+
+            id = Column(Integer, primary_key=True)
+            ptype = Column(String(255))
+            v0 = Column(String(255))
+            v1 = Column(String(255))
+            v2 = Column(String(255))
+            v3 = Column(String(255))
+            v4 = Column(String(255))
+            v5 = Column(String(255))
+
+        engine = create_engine("sqlite://")
+
+        # Create adapter with custom db_class and create_table=False
+        adapter = Adapter(engine, db_class=CustomRule, create_table=False)
+
+        # Verify that the table was NOT created
+        inspector = inspect(engine)
+        tables = inspector.get_table_names()
+        self.assertEqual(
+            len(tables), 0, "No tables should be created when create_table=False"
+        )
