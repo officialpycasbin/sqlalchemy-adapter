@@ -19,6 +19,10 @@ else:
         pass
 
 
+# Cache for CasbinRule classes by table name to avoid duplicate class warnings
+_casbin_rule_cache = {}
+
+
 def create_casbin_rule_class(table_name):
     """
     Factory function to create a CasbinRule class with a custom table name.
@@ -29,31 +33,44 @@ def create_casbin_rule_class(table_name):
     Returns:
         db_class (CasbinRule): The CasbinRule class.
     """
+    # Return cached class if it exists for this table name
+    if table_name in _casbin_rule_cache:
+        return _casbin_rule_cache[table_name]
 
-    class CasbinRule(Base):
-        __tablename__ = table_name
-        __table_args__ = {"extend_existing": True}
+    # Create a unique class name based on the table name to avoid SQLAlchemy warnings
+    # Convert table_name to a valid Python class name
+    class_name = "CasbinRule_" + "".join(c if c.isalnum() else "_" for c in table_name)
 
-        id = Column(Integer, primary_key=True)
-        ptype = Column(String(255))
-        v0 = Column(String(255))
-        v1 = Column(String(255))
-        v2 = Column(String(255))
-        v3 = Column(String(255))
-        v4 = Column(String(255))
-        v5 = Column(String(255))
+    # Dynamically create the class with a unique name
+    CasbinRule = type(
+        class_name,
+        (Base,),
+        {
+            "__tablename__": table_name,
+            "__table_args__": {"extend_existing": True},
+            "id": Column(Integer, primary_key=True),
+            "ptype": Column(String(255)),
+            "v0": Column(String(255)),
+            "v1": Column(String(255)),
+            "v2": Column(String(255)),
+            "v3": Column(String(255)),
+            "v4": Column(String(255)),
+            "v5": Column(String(255)),
+            "__str__": lambda self: ", ".join(
+                [self.ptype]
+                + [
+                    v
+                    for v in (self.v0, self.v1, self.v2, self.v3, self.v4, self.v5)
+                    if v is not None
+                ]
+            ),
+            "__repr__": lambda self: '<CasbinRule {}: "{}">'.format(self.id, str(self)),
+            "__module__": "sqlalchemy_adapter.adapter",
+        },
+    )
 
-        def __str__(self):
-            arr = [self.ptype]
-            for v in (self.v0, self.v1, self.v2, self.v3, self.v4, self.v5):
-                if v is None:
-                    break
-                arr.append(v)
-            return ", ".join(arr)
-
-        def __repr__(self):
-            return '<CasbinRule {}: "{}">'.format(self.id, str(self))
-
+    # Cache the class before returning
+    _casbin_rule_cache[table_name] = CasbinRule
     return CasbinRule
 
 
