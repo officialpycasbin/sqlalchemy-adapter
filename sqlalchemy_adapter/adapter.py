@@ -40,7 +40,7 @@ def create_casbin_rule_class(table_name):
     # Create a unique class name based on the table name to avoid SQLAlchemy warnings
     # Convert table_name to a valid Python class name
     class_name = "CasbinRule_" + "".join(c if c.isalnum() else "_" for c in table_name)
-    
+
     # Dynamically create the class with a unique name
     CasbinRule = type(
         class_name,
