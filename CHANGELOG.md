@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.9.0](https://github.com/officialpycasbin/sqlalchemy-adapter/compare/v1.8.0...v1.9.0) (2025-11-17)
+
+
+### Features
+
+* fix SQLAlchemy warning from duplicate CasbinRule class names ([#12](https://github.com/officialpycasbin/sqlalchemy-adapter/issues/12)) ([6bea106](https://github.com/officialpycasbin/sqlalchemy-adapter/commit/6bea106d7d4e2c0a14f41d555e1402680d4fad9a))
+
 # [1.8.0](https://github.com/officialpycasbin/sqlalchemy-adapter/compare/v1.7.0...v1.8.0) (2025-11-16)
 
 
